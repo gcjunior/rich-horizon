@@ -177,6 +177,10 @@ function AllocationRow({
 }) {
   const [text, setText] = useState(String(item.adjustedAmountCents / 100));
 
+  useEffect(() => {
+    setText(String(item.adjustedAmountCents / 100));
+  }, [item.adjustedAmountCents]);
+
   return (
     <View style={styles.row}>
       <Pressable onPress={onToggle} style={styles.rowMain}>

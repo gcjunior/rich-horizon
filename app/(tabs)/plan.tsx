@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Redirect } from 'expo-router';
 import { EmptyState } from '../../src/components/EmptyState';
@@ -14,8 +14,17 @@ import { formatMonthDay, parseISODate } from '../../src/utils/dates';
 
 export default function PlanScreen() {
   const onboardingComplete = useFinanceStore((s) => s.onboardingComplete);
-  const cliff = useFinanceStore(selectBillCliff);
-  const statuses = useFinanceStore(selectExpenseStatuses);
+  const expenses = useFinanceStore((s) => s.expenses);
+  const buckets = useFinanceStore((s) => s.buckets);
+  const incomeSources = useFinanceStore((s) => s.incomeSources);
+  const cliff = useMemo(
+    () => selectBillCliff(useFinanceStore.getState()),
+    [expenses, buckets, incomeSources],
+  );
+  const statuses = useMemo(
+    () => selectExpenseStatuses(useFinanceStore.getState()),
+    [expenses, buckets, incomeSources],
+  );
 
   if (!onboardingComplete) {
     return <Redirect href="/" />;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import {
@@ -9,7 +9,6 @@ import { ProgressBar } from '../../src/components/ProgressBar';
 import { PrimaryButton } from '../../src/components/PrimaryButton';
 import { SafeToSpendCard } from '../../src/components/SafeToSpendCard';
 import {
-  selectLatestIncome,
   selectNextPriority,
   selectSourceName,
   useFinanceStore,
@@ -24,13 +23,19 @@ export default function TodayScreen() {
   const transactions = useFinanceStore((s) => s.transactions);
   const buckets = useFinanceStore((s) => s.buckets);
   const expenses = useFinanceStore((s) => s.expenses);
-  const latest = useFinanceStore(selectLatestIncome);
-  const nextPriority = useFinanceStore(selectNextPriority);
-  const sourceName = useFinanceStore((s) =>
-    latest ? selectSourceName(s, latest.incomeSourceId) : '',
-  );
+  const incomeEntries = useFinanceStore((s) => s.incomeEntries);
+  const incomeSources = useFinanceStore((s) => s.incomeSources);
   const lastConfirmMessage = useFinanceStore((s) => s.lastConfirmMessage);
   const clearConfirmMessage = useFinanceStore((s) => s.clearConfirmMessage);
+
+  const latest = incomeEntries[0] ?? null;
+  const sourceName = latest
+    ? selectSourceName(useFinanceStore.getState(), latest.incomeSourceId)
+    : '';
+  const nextPriority = useMemo(
+    () => selectNextPriority(useFinanceStore.getState()),
+    [expenses, buckets, incomeSources],
+  );
 
   const flexible = transactions
     .filter((t) => !t.expenseId)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { PrimaryButton } from '../../src/components/PrimaryButton';
@@ -8,7 +8,13 @@ import { colors, radii, spacing } from '../../src/theme/colors';
 import { formatCAD } from '../../src/utils/money';
 
 export default function SetupReviewScreen() {
-  const plan = useFinanceStore(selectMonthlyPlan);
+  const incomeSources = useFinanceStore((s) => s.incomeSources);
+  const expenses = useFinanceStore((s) => s.expenses);
+  const goals = useFinanceStore((s) => s.goals);
+  const plan = useMemo(
+    () => selectMonthlyPlan(useFinanceStore.getState()),
+    [incomeSources, expenses, goals],
+  );
   const completeOnboarding = useFinanceStore((s) => s.completeOnboarding);
 
   const rows: { label: string; value: number }[] = [
