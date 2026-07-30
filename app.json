@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Rich Horizon",
+    "slug": "rich-horizon",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "richhorizon",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.richhorizon.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#346023",
+        "foregroundImage": "./assets/images/adaptive-icon.png"
+      },
+      "package": "com.richhorizon.app"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#346023"
+        }
+      ],
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
