@@ -1,0 +1,42 @@
+appId: com.richhorizon.app
+---
+- launchApp:
+    clearState: true
+- waitForAnimationToEnd
+- takeScreenshot: welcome
+- tapOn: "Load Demo Financial Data"
+- extendedWaitUntil:
+    visible: "Safe to spend today"
+    timeout: 15000
+- waitForAnimationToEnd
+- takeScreenshot: today
+# Tab bar: Today | Bill Cliff | Goals | Insights
+- tapOn:
+    point: "37%,96%"
+- extendedWaitUntil:
+    visible: "Your next bill cliff"
+    timeout: 10000
+- waitForAnimationToEnd
+- takeScreenshot: bill-cliff
+- tapOn:
+    point: "62%,96%"
+- extendedWaitUntil:
+    visible: "First Horizon"
+    timeout: 10000
+- waitForAnimationToEnd
+- takeScreenshot: goals
+- tapOn: "Simulate goal completion"
+- extendedWaitUntil:
+    visible: "Goal achieved!"
+    timeout: 10000
+- waitForAnimationToEnd
+- takeScreenshot: celebration
+- tapOn: "Keep going"
+- waitForAnimationToEnd
+- tapOn:
+    point: "87%,96%"
+- extendedWaitUntil:
+    visible: "Flexible spending this month"
+    timeout: 10000
+- waitForAnimationToEnd
+- takeScreenshot: insights

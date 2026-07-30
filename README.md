@@ -48,6 +48,8 @@ Open the welcome screen and choose a demo worker:
 
 Tap **Load Demo Financial Data** to parse the bundled dataset, filter records for that worker, and calculate the financial summary.
 
+![Welcome screen — choose a demo worker and load data](assets/screenshots/welcome.png)
+
 ### 2. Review today’s allocation
 
 The Today dashboard shows:
@@ -57,6 +59,8 @@ The Today dashboard shows:
 - **Allocation waterfall** — how today’s pay is split across bills, buffer, goals, and spend
 - **Next best action** — one deterministic recommendation derived from the calculated data
 
+![Today dashboard — safe to spend and allocation waterfall](assets/screenshots/today.png)
+
 ### 3. Understand the bill cliff
 
 The Bill Cliff screen groups essential recurring obligations by next due date and highlights the date with the highest total. It shows:
@@ -64,6 +68,8 @@ The Bill Cliff screen groups essential recurring obligations by next due date an
 - Bills due and amounts
 - Total / funded / still needed
 - Equivalent average workdays required to cover the cliff
+
+![Bill cliff — upcoming obligations grouped by due date](assets/screenshots/bill-cliff.png)
 
 ### 4. Track goals and celebrate progress
 
@@ -74,9 +80,15 @@ Goals include:
 
 Tap **Simulate goal completion** to trigger the original **Million-Dollar Face** celebration mascot with confetti.
 
+![Goals — First Horizon and Future Investment progress](assets/screenshots/goals.png)
+
+![Goal achieved — Million-Dollar Face celebration](assets/screenshots/celebration.png)
+
 ### 5. Spot flexible spending trade-offs
 
 Insights lists the top discretionary categories and one mathematically supported trade-off — for example, redirecting restaurant spend toward a phone bill — without judgmental language.
+
+![Insights — discretionary spending and trade-off idea](assets/screenshots/insights.png)
 
 ## Tech Stack
 
@@ -137,6 +149,8 @@ src/store/           Zustand app state
 src/theme/           Rich Horizon colors and spacing
 src/utils/           Money (cents) and date helpers
 assets/demo/         Filtered CSV-derived demo dataset for W-0001 and W-0202
+assets/screenshots/  App screenshots used in this README
+.maestro/flows/      Maestro flow used to capture screenshots on the iOS Simulator
 ```
 
 ## Important Notes
