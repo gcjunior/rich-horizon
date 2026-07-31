@@ -6,22 +6,28 @@ import { formatCAD, type Cents } from '../utils/money';
 interface Props {
   safeToSpendCents: Cents;
   fundingGapCents: Cents;
+  onTrackCopy?: string;
 }
 
-export function SafeToSpendCard({ safeToSpendCents, fundingGapCents }: Props) {
-  const shortfall = fundingGapCents > 0;
+export function SafeToSpendCard({
+  safeToSpendCents,
+  fundingGapCents,
+  onTrackCopy,
+}: Props) {
+  const shortfall = fundingGapCents > 0 || safeToSpendCents === 0;
 
   return (
-    <View style={[styles.card, shortfall ? styles.cardShortfall : styles.cardOk]}>
-      <Text style={styles.label}>Safe to spend today</Text>
-      <Text style={styles.amount}>{formatCAD(safeToSpendCents)}</Text>
-      {shortfall ? (
+    <View style={[styles.card, shortfall && safeToSpendCents === 0 ? styles.cardShortfall : styles.cardOk]}>
+      <Text style={styles.label}>Safe to spend</Text>
+      <Text style={styles.amount}>{formatCAD(Math.max(0, safeToSpendCents))}</Text>
+      {safeToSpendCents === 0 ? (
         <Text style={styles.supportDanger}>
-          Current funding gap: {formatCAD(fundingGapCents)}
+          {onTrackCopy ??
+            'Required expenses need attention before flexible spending.'}
         </Text>
       ) : (
         <Text style={styles.support}>
-          Your upcoming bills and protected goals remain funded.
+          {onTrackCopy ?? 'Your protected expenses remain on track.'}
         </Text>
       )}
     </View>
